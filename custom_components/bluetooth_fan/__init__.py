@@ -1,8 +1,9 @@
 """
-Custom integration to integrate integration_blueprint with Home Assistant.
+Custom integration to integrate Chungear / Hampton Bay / Harbor Breeze
+bluetooth fan controllers with Home Assistant.
 
 For more details about this integration, please refer to
-https://github.com/custom-components/integration_blueprint
+https://github.com/JohnnyNoodlez/bluetooth_fan
 """
 import asyncio
 from datetime import timedelta
@@ -14,7 +15,7 @@ from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
-from .api import IntegrationBlueprintApiClient
+from .api import BluetoothFanApiClient
 
 from .const import (
     CONF_PASSWORD,
@@ -44,9 +45,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     password = entry.data.get(CONF_PASSWORD)
 
     session = async_get_clientsession(hass)
-    client = IntegrationBlueprintApiClient(username, password, session)
+    client = BluetoothFanApiClient(username, password, session)
 
-    coordinator = BlueprintDataUpdateCoordinator(hass, client=client)
+    coordinator = BluetoothFanDataUpdateCoordinator(hass, client=client)
     await coordinator.async_refresh()
 
     if not coordinator.last_update_success:
@@ -65,11 +66,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     return True
 
 
-class BlueprintDataUpdateCoordinator(DataUpdateCoordinator):
+classBluetoothFanDataUpdateCoordinator(DataUpdateCoordinator):
     """Class to manage fetching data from the API."""
 
     def __init__(
-        self, hass: HomeAssistant, client: IntegrationBlueprintApiClient
+        self, hass: HomeAssistant, client: BluetoothFanApiClient
     ) -> None:
         """Initialize."""
         self.api = client

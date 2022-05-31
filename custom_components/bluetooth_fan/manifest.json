@@ -1,0 +1,12 @@
+{
+  "domain": "bluetooth_fan",
+  "name": "Bluetooth Fan",
+  "documentation": "https://github.com/JohnnyNoodlez/bluetooth-fan",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/JohnnyNoodlez/bluetooth-fan/issues",
+  "version": "0.0.1",
+  "config_flow": true,
+  "codeowners": [
+    "@JohnnyNoodlez"
+  ]
+}
